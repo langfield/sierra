@@ -1,0 +1,62 @@
+\documentclass[10pt]{amsart}
+\usepackage[skins,minted]{tcolorbox}
+\definecolor{mintedbackground}{rgb}{0.95,0.95,0.95}
+
+\setminted[rust]{
+    bgcolor=mintedbackground,
+    fontfamily=tt,
+    linenos=true,
+    numberblanklines=true,
+    numbersep=12pt,
+    numbersep=5pt,
+    gobble=0,
+    frame=leftline,
+    framesep=2mm,
+    funcnamehighlighting=true,
+    tabsize=4,
+    obeytabs=false,
+    mathescape=false
+    samepage=false,
+    showspaces=false,
+    showtabs =false,
+    texcl=false,
+    baselinestretch=1.2,
+    fontsize=\footnotesize,
+    breaklines=true,
+}
+\newtcblisting{code}[2][]{listing engine=minted, listing only,#1, title=\texttt{#2}, minted language=rust, colback=mintedbackground}
+
+
+
+\begin{document}
+\title{On Sierra}
+\author{Malcolm Langfield}
+\begin{abstract}
+  We look at a program in high-level Cairo, Sierra, and Casm.
+\end{abstract}
+
+\maketitle
+
+Look at this:
+\vspace{1em}
+\begin{code}{cairo/examples/corelib\_usage.cairo}
+impl MyCopy of Copy::<Option<(felt252, felt252)>>;
+
+fn foo(x: Option<(felt252, felt252)>) -> Option<felt252> {
+    let y = x;
+    match x {
+        Option::Some(x) => {
+            let (x, y) = x;
+            Option::Some(x)
+        },
+        // TODO(spapini): Replace with _.
+        Option::None(o) => {
+            return Option::None(());
+        },
+    }
+}
+\end{code}
+
+
+
+\end{document}
